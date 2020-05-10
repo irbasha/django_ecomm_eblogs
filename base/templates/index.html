@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+<!-- <section id="home" class="main-home parallax-section">
+     <div class="overlay"></div>
+     <div id="particles-js"></div>
+     <div class="container">
+          <div class="row">
+               <div class="col-md-12 col-sm-12">
+                    <h1>Hello! Welcome to SheeBlogs.</h1>
+                    <a href="#blog" class="smoothScroll btn btn-default">Discover More</a>
+               </div>
+
+          </div>
+     </div>
+</section> -->
+
+<section id="blog">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-offset-1 col-md-12 col-sm-12">
+                    {% for blog in blogs %}
+                    <div class="blog-post-thumb">
+                         <div class="blog-post-title">
+                              <h3><a href="{% url 'core:detail' blog.pk %}">{{ blog.title }}</a></h3>
+                         </div>
+                         <div class="blog-post-format">
+                              <span><a href="#"><img src="{{ blog.author.image.url }}" class="img-responsive img-circle" alt="image"> {{ blog.author.name }} </a></span>
+                              <span><i class="fa fa-date"></i> {{ blog.created_on }} </span>
+                              <span><a href="{% url 'core:detail' blog.pk %}#blog-comment"><i class="fa fa-comment-o"></i> {{ blog.no_of_comments }} Comments </a></span>
+                         </div>
+                         <div class="blog-post-des">
+                              <p>{{ blog.description }}</p>
+                              <a href="{% url 'core:detail' blog.pk %}" class="btn btn-default">Continue Reading</a>
+                         </div>
+                    </div>
+                    {% endfor %}
+               </div>
+          </div>
+     </div>
+</section>
+
+{% endblock content %}
