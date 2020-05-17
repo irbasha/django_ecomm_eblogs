@@ -1,12 +1,16 @@
+from django.db import models
 from django.contrib import admin
-from .models import Post, Category, Comment, Author, BodyText
+from .models import Entry, Category, Comment, Author
+from martor.widgets import AdminMartorWidget
 
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_on', 'last_modified']
+class EntryAdmin(admin.ModelAdmin):
+    list_display = ['title', 'pub_date', 'mod_date']
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
 
-
-admin.site.register(Post, PostAdmin)
+admin.site.register(Entry, EntryAdmin)
 admin.site.register(Category)
 admin.site.register(Comment)
 admin.site.register(Author)

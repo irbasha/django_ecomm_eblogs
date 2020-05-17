@@ -5,6 +5,7 @@ from .views import (
     category,
     about,
     contact,
+    success,
 )
 
 app_name = 'core'
@@ -14,4 +15,5 @@ urlpatterns = [
     path('category/', category, name='category'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
+    path('success/', success, name='success'),
 ]

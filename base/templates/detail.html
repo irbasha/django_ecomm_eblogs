@@ -1,84 +1,76 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% load martortags %} {% block content %}
 
 <section id="blog-single-post">
-     <div class="container">
-          <div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12">
+                <div class="blog-single-post-thumb">
 
-               <div class="col-md-offset-1 col-md-10 col-sm-12">
-                    <div class="blog-single-post-thumb">
-
-                         <div class="blog-post-title">
-                              <h2>{{ blog.title }}</a></h2>
-                         </div>
-                         <div class="blog-post-format">
-                              <span><a href="#"><img src="{{ blog.author.image.url }}"
-                                             class="img-responsive img-circle"> {{ blog.author.name }} </a></span>
-                              <span><i class="fa fa-date"></i>{{ blog.created_on }}</span>
-                              <span><a href="#blog-comment"><i class="fa fa-comment-o"></i> {{ blog.no_of_comments }}
+                    <div class="blog-post-title">
+                        <h2>{{ entry.title }}</h2>
+                    </div>
+                    <div class="blog-post-format">
+                        <span><a href="#"><img src="{{ entry.author.author_image.url }}"
+                                             class="img-responsive img-circle"> {{ entry.author.name }} </a></span>
+                        <span><i class="fa fa-date"></i>{{ entry.pub_date }}</span>
+                        <span><a href="#blog-comment"><i class="fa fa-comment-o"></i> {{ entry.no_of_comments }}
                                         Comments</a></span>
-                         </div>
+                    </div>
 
-                         <div class="blog-post-des">
-                              <p>
-                                   {{ blog.body_text }}
-                              </p>
-                         </div>
+                    <div class="blog-post-des">
+                        {{ entry.body_text|safe_markdown }}
+                    </div>
 
-                         <div class="blog-author">
-                              <div class="media">
-                                   <div class="media-object pull-left">
-                                        <img src="{{ blog.author.image.url }}" class="img-circle img-responsive"
-                                             alt="image">
-                                   </div>
-                                   <div class="media-body">
-                                        <h3 class="media-heading"><a href="#">{{ blog.author.name }}</a></h3>
-                                        <p>{{ blog.author.description }}</p>
-                                   </div>
-                              </div>
-                         </div>
+                    <div class="blog-author">
+                        <div class="media">
+                            <div class="media-object pull-left">
+                                <img src="{{ entry.author.author_image.url }}" class="img-circle img-responsive" alt="image">
+                            </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a href="#">{{ entry.author.author_name }}</a></h3>
+                                <p>{{ entry.author.author_intro }}</p>
+                            </div>
+                        </div>
+                    </div>
 
-                         <div class="blog-comment" id="blog-comment">
-                              <h3>Comments</h3>
-                              {% for comment in comments %}
-                              <div class="media">
-                                   <!-- <div class="media-object pull-left">
+                    <div class="blog-comment" id="blog-comment">
+                        <h3>Comments</h3>
+                        {% if comments %} {% for comment in comments %}
+                        <div class="media">
+                            <!-- <div class="media-object pull-left">
                                              <img src="{% static 'images/comment-image1.jpg' %}" class="img-responsive img-circle" alt="Blog Image 11">
                                         </div> -->
-                                   <div class="media-body">
-                                        <h3 class="media-heading">{{ comment.author }}</h3>
-                                        <span>{{ comment.created_on }}</span>
-                                        <p>{{comment.body}}</p>
-                                   </div>
-                              </div>
-                              {% endfor %}
-                         </div>
-
-                         <div class="blog-comment-form">
-                              <h3>Leave a Comment</h3>
-                              <form action="/detail/{{blog.id}}/" method='post'>
-                                   {% csrf_token %}
-                                   <div>
-                                        {{form.author}}
-                                   </div>
-                                   <div>
-                                        {{form.email}}
-                                   </div>
-                                   <div>
-                                        {{form.body}}
-                                   </div>
-                                   <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                                   <div class="col-md-3 col-sm-4">
-                                        <input name="submit" type="submit" class="form-control" id="submit"
-                                             value="Post Your Comment">
-                                   </div>
-                              </form>
-                         </div>
+                            <div class="media-body">
+                                <h3 class="media-heading">{{ comment.author }}</h3>
+                                <span>{{ comment.created_on }}</span>
+                                <p>{{comment.body}}</p>
+                            </div>
+                        </div>
+                        {% endfor %} {% endif %}
                     </div>
-               </div>
-          </div>
+
+                    <div class="blog-comment-form">
+                        <h3>Leave a Comment</h3>
+                        <form action="/detail/{{entry.id}}/" method='post'>
+                            {% csrf_token %}
+                            <div>
+                                {{form.author}}
+                            </div>
+                            <div>
+                                {{form.email}}
+                            </div>
+                            <div>
+                                {{form.body}}
+                            </div>
+                            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                            <div class="col-md-3 col-sm-4">
+                                <input name="submit" type="submit" class="form-control" id="submit" value="Post Your Comment">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
-
 {% endblock content %}

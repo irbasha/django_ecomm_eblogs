@@ -1,4 +1,4 @@
-#!/home/irfan/Documents/DjangoProjects/eblogs/env/bin/python3
+#!/home/irfan/Documents/Irfan/Learning/GithubProjects/django_ecomm_eblogs/env/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
